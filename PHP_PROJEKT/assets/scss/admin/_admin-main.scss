@@ -1,0 +1,118 @@
+.container__admin{
+    color: black;
+    
+    .sidebar{
+        background: $header--bg;
+        color: white;
+        min-height: 300px;
+        border-radius: 5px;
+        ul{
+            margin: 0;
+            padding: 0;
+            
+            a{
+                padding: 18px;
+                display: block;
+                border-bottom: 1px solid $page--bg;
+                transition: all 0.5s;        
+                
+                &:hover{
+                    padding-left: 28px;
+                    
+                    color: $page--bg;
+                    text-decoration: none;
+                }
+            }
+            
+        }
+    }
+    
+    
+    
+    .row{
+        display: flex;
+        
+        .sidebar{
+            width: 25%;
+            margin: 30px;
+        }
+        
+        .posts{
+            margin: 30px;
+            width: 70%;
+            h2{
+                font-size: 3rem;
+                font-weight: bold;
+                margin: 20px 0;
+            }
+            .button{
+                a{
+                    margin: 10px;
+                }
+            }  
+            a.Update {
+                color: green;
+            }
+        
+            /* Додаємо стиль для класу "Delete" (червоний текст) */
+            a.Delete {
+                color: red;
+            }
+        
+            .err{
+                font-family: $main--font;
+                font-size: 1.7rem;
+                margin: 10px 0;
+                color: red;
+            
+            }         
+            textarea{
+                    color: black;
+            }
+            
+        }
+    }
+    .title-table{
+        border-bottom: 1px solid black;
+        div{
+            color: inherit;
+        }
+    }
+    .title-table, .post{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        
+        div{
+            max-width: 100px;
+        }
+        
+    }
+}
+.add-post{
+    form{
+        width: 100%;
+        padding: 10px;
+        
+        input, button, textarea{
+            margin-bottom: 30px;
+        }
+        select{
+            margin: 20px 0;
+            background: white;
+        }
+        button{
+            width: 150px;
+        }
+    }
+    
+}
+
+.posts{
+    .row{
+        margin: 10px;
+    }
+}
+.input-group-text{
+    margin-top: 20px;
+}

@@ -1,0 +1,23 @@
+// Base styles
+@import './base/reset';
+@import './base/imports';
+@import './base/vars';
+@import './base/mixins';
+@import './base/base';
+
+
+// Blocks
+@import './blocks/header';
+@import './blocks/nav';
+@import './blocks/carousel';
+@import './blocks/main__content';
+@import './blocks/posts';
+@import './blocks/sidebar';
+@import './blocks/footer';
+@import './blocks/single';
+@import './blocks/registation';
+
+
+// Admin
+@import './admin/header-admin';
+@import './admin/admin-main';

@@ -1,0 +1,37 @@
+.sidebar{
+    width: 20%;
+
+    margin-top: 15px;
+    
+    
+    height: 500px;
+
+    // SEARCH INPUT BLOCK
+    .search{
+        @include sidebar-container;
+
+    }
+
+    // CATEGORIES BLOCK
+    .categories{
+        @include sidebar-container;
+        
+        ul{
+            li{
+                a{
+                    display: block;
+                    padding: 10px 0;
+                    border-bottom: 1px solid $page--bg;
+                    transition: padding-left 0.3s;
+                    font-weight: 500;
+                    color: $header--bg;
+                    font-size: 1.5rem;
+
+                    &:hover{
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

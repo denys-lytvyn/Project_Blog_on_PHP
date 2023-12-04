@@ -1,0 +1,52 @@
+.registration{
+    max-width: 800px;
+    
+    margin: 50px auto;
+
+    color: $font__main--color;
+
+    font-family: $nav--font;
+    font-size: 1.2em;
+
+    p{
+        font-family: $main--font;
+        font-size: 1.7rem;
+        margin: 10px 0;
+        color: red;
+    
+    }
+
+    input{
+        height: 3.2em
+    }
+
+    h2{
+        @include custom-h2;
+        padding: 0;
+        font-size: 2em;
+
+        font-family: $main--font;
+    }
+
+    button{
+        padding: 9px 30px;
+        background: $header__drop__menu--bg;
+        height: 37px;
+        margin-right: 10px;
+    }
+
+    .signIn{
+        padding: 9px 30px;
+        margin: 0 10px;
+
+        background: white;
+        color: #000;
+        border: 1px solid white;
+        border-radius: 5px;
+
+        &:hover{
+            border: 1px solid rgb(165, 165, 165);
+
+        }
+    }
+}

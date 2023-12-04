@@ -1,0 +1,102 @@
+.footer{
+    width: 100%;
+
+    background: $header--bg;
+    padding-top: 10px;
+
+    position: sticky;
+    top: 100%;
+
+    &__row{
+        max-width: 1200px;
+        width: 100%;
+        
+        // background: #000;
+        
+        margin: 0 auto;
+    
+        display: flex;
+
+        justify-content: space-between;
+
+        h3{
+            font-weight: 500;
+            font-size: 2rem;
+
+            padding-bottom: 10px;
+            border-bottom: 1px solid white;
+        }
+        
+        &__container{
+            padding: 10px;
+
+            *{
+                margin-bottom: 5px;
+            }
+
+            span{
+                margin-right: 10px;
+            }
+            p{
+                color: $page--bg;
+                margin: 10px 0;
+                font-family: $post--font;
+                font-size: 1.1em;
+            }
+
+            .contacts{
+
+                ion-icon{
+                    font-size: 1.8rem;
+                    margin-right: 10px;
+
+                    border: 1px solid white;
+                    border-radius: 50%;
+                    
+                    padding: 7px;
+                }
+            }
+        }
+
+        &__about{
+            width: 50%;
+        }
+
+        &__links{
+            width: 15%;
+        }
+
+        &__contact-form{
+            width: 30%;
+
+            input, textarea{
+                background: white;
+                width: 100%;
+                
+                padding: 5px;
+
+                color: black;
+            }
+            button{
+                border: 1px solid white;
+
+                &:hover{
+                    color: $accent--color;
+                }
+            }
+        }
+    }
+
+    ion-icon {
+        transform: translateY(8px);
+    }
+
+    
+    .copyrights{
+        padding: 8px;
+        transform: translateY(-10px);
+        
+        color: $page--bg;
+        font-family: $post--font;
+    }
+}

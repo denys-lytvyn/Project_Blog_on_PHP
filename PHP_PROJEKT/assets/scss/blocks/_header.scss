@@ -1,0 +1,25 @@
+.header{
+    width: 100%;
+    height: 80px;
+    
+    background: $header--bg;
+    
+    &__row{
+        margin: 0px auto;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        width: 80%;
+        max-width: 1200px;
+        height: inherit;
+
+        &__logo{
+            flex-basis: 20%;
+
+            font-size: 3.5rem;
+            font-family: $logo--font;
+        }
+    }
+}
