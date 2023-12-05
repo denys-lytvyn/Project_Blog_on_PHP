@@ -127,8 +127,8 @@ main {
 }
 
 ion-icon {
-  transform: translateY(3px);
-  margin-right: 5px;
+  transform: translateY(2px);
+  margin-right: 1px;
 }
 
 input {
@@ -144,6 +144,40 @@ input {
 }
 input:focus {
   border: 1px solid black;
+}
+
+.form-check {
+  display: flex;
+  height: 20px;
+}
+.form-check .form-check-input {
+  width: 100px;
+  margin: 0 -20px;
+}
+.form-check .form-check-label {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  font-weight: normal;
+  letter-spacing: 3px;
+}
+.form-check input {
+  height: 20px;
+}
+
+div.publish a {
+  color: black;
+}
+div.publish a:hover {
+  color: black;
+}
+
+.helped_class {
+  margin: 0 10px;
+}
+
+section.mt-52 div {
+  color: black;
 }
 
 .header {
@@ -593,8 +627,13 @@ input:focus {
 }
 .container__admin .row .posts {
   margin: 30px;
-  width: 70%;
+  width: 75%;
   /* Додаємо стиль для класу "Delete" (червоний текст) */
+}
+.container__admin .row .posts .row > div {
+  width: 150px;
+  overflow: hidden;
+  max-height: 60px;
 }
 .container__admin .row .posts h2 {
   font-size: 3rem;
@@ -616,6 +655,9 @@ input:focus {
   margin: 10px 0;
   color: red;
 }
+.container__admin .row .posts .err p {
+  color: red;
+}
 .container__admin .row .posts textarea {
   color: black;
 }
@@ -635,7 +677,7 @@ input:focus {
 }
 
 .add-post form {
-  width: 100%;
+  width: 700px;
   padding: 10px;
 }
 .add-post form input, .add-post form button, .add-post form textarea {

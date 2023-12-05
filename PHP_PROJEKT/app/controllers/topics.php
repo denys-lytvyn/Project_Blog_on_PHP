@@ -1,13 +1,16 @@
 <?php
-
+// Initialize an array to store error messages
 include SITE_ROOT . '/app/database/db.php';
 
-$errMsg = '';
+// Initialize an array to store error messages
+$errMsg = [];
 
+// Initialize variables for topic data
 $id = '';
 $name = '';
 $description = '';
 
+// Retrieve all topics from the database
 $topics = selectAll('topics');
 
 // CREATE CATEGORIES
@@ -18,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-create'])) {
 
 
     if ($name === '' || $description === '') {
-        $errMsg = "Please fill in all the required fields.";
+        array_push($errMsg, "Please fill in all the required fields.");
     } elseif (mb_strlen($name, 'UTF8') < 2) {
-        $errMsg = 'Topic should be at least 2 characters long';
+        array_push($errMsg, "Topic should be at least 2 characters long");
     } else {
         $existance = selectOne('topics', ['name' => $name]);
         if ($existance) {
-            $errMsg = 'This topic is already exist.';
+            array_push($errMsg, "This topic is already exist.");
         } else {
 
             $topic = [
@@ -62,9 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-edit'])) {
 
 
     if ($name === '' || $description === '') {
-        $errMsg = "Please fill in all the required fields.";
+        array_push($errMsg, "Please fill in all the required fields.");
     } elseif (mb_strlen($name, 'UTF8') < 2) {
-        $errMsg = 'Topic should be at least 2 characters long';
+        array_push($errMsg, "Topic should be at least 2 characters long");
     } else {
         $topic = [
             'name' => $name,
@@ -72,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-edit'])) {
         ];
 
         $id = $_POST['id'];
-        $topic_id = update($pdo, 'topics', $id, $topic);
+        $topic_id = update('topics', $id, $topic);
 
         header('location: ' . BASE_URL . 'admin/topics/index.php');
     }

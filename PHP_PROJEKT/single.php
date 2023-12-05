@@ -1,6 +1,8 @@
-<?php
-include("path.php");
+<?php include("path.php");
+
 include "app/controllers/topics.php";
+$post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
+
 ?>
 
 <!DOCTYPE html>
@@ -24,59 +26,20 @@ include "app/controllers/topics.php";
         <section class="main__content">
             <div class="main__content__container">
                 <section class="single__post">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Fugiat id hic architecto sunt tenetur. Dicta enim a molestias,
-                        facilis, quaerat odio voluptatum praesentium vel fugit laboriosam
-                        magni, sed autem ratione.</h2>
-                    <img src="./assets/images/1.jpg" alt="" class="img">
+                    <h2>
+                        <?php echo $post['title']; ?>
+                    </h2>
+                    <img src="<?= BASE_URL . 'assets/images/posts/' . $post['img'] ?>" alt="<?= $post['title'] ?>"
+                        class="img">
 
                     <div class="text">
-                        <div class="single__post__info"><ion-icon name="person"></ion-icon>Autor name <ion-icon
-                                name="calendar"></ion-icon> May 14, 2023</div>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        Perspiciatis nam illum nisi asperiores ex expedita blanditiis
-                        incidunt ipsam officia aliquam quis labore, ab ea sit modi
-                        cupiditate quibusdam, aut quia!
+                        <div class="single__post__info">
+                            <ion-icon name="person"></ion-icon>
+                            <?= $post['username']; ?>
+                            <ion-icon name="calendar"></ion-icon>
+                            <?= $post['created_date']; ?>
+                        </div>
+                        <?= $post['content']; ?>
                     </div>
                 </section>
 
@@ -91,9 +54,11 @@ include "app/controllers/topics.php";
                         <h3><ion-icon name="list"></ion-icon>Categories</h3>
                         <ul>
                             <?php foreach ($topics as $key => $topic): ?>
-                                <li><a href="#">
-                                        <?= $topic['name'] ?>
-                                    </a></li>
+                                <li>
+                                    <a href="<?= BASE_URL . 'category.php?id=' . $topic['id']; ?>">
+                                        <?= $topic['name']; ?>
+                                    </a>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </aside>

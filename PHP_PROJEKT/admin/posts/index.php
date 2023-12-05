@@ -1,6 +1,6 @@
 <?php
 include '../../path.php';
-include '../../app/database/db.php';
+include '../../app/controllers/posts.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,29 +44,32 @@ include '../../app/database/db.php';
                     <div class="Author">Author</div>
                     <div class="Update">Update</div>
                     <div class="Delete">Delete</div>
+                    <div class="Delete">Status</div>
                 </div>
-                <div class="row post">
-                    <div class="id">1</div>
-                    <div class="title">Topic</div>
-                    <div class="Author">Admin</div>
-                    <div><a href="#" class="Update">Edit</a></div>
-                    <div><a href="#" class="Delete">Delete</a></div>
-                </div>
-                <div class="row post">
-                    <div class="id">1</div>
-                    <div class="title">Topic</div>
-                    <div class="Author">Admin</div>
-                    <div><a href="#" class="Update">Edit</a></div>
-                    <div><a href="#" class="Delete">Delete</a></div>
-                </div>
-                <div class="row post">
-                    <div class="id">1</div>
-                    <div class="title">Topic</div>
-                    <div class="Author">Admin</div>
-                    <div><a href="#" class="Update">Edit</a></div>
-                    <div><a href="#" class="Delete">Delete</a></div>
-                </div>
-
+                <?php foreach ($postsAdm as $key => $post): ?>
+                    <div class="row post">
+                        <div class="id">
+                            <?= $key + 1; ?>
+                        </div>
+                        <div class="title">
+                            <?= strlen($post['title']) > 35 ? mb_substr($post['title'], 0, 35, 'UTF-8') . ' ...' : $post['title']; ?>
+                        </div>
+                        <div class="Author">
+                            <?= $post['username']; ?>
+                        </div>
+                        <div><a href="edit.php?id=<?= $post['id']; ?>" class="Update">Edit</a></div>
+                        <div><a href="edit.php?delete_id=<?= $post['id']; ?>" class="Delete">Delete</a></div>
+                        <?php if ($post['status']): ?>
+                            <div class="publish"><a href="edit.php?publish=0&pub_id=<?= $post['id']; ?>"
+                                    class="Status Publish">Unpublish</a>
+                            </div>
+                        <?php else: ?>
+                            <div class="publish"><a href="edit.php?publish=1&pub_id=<?= $post['id']; ?>"
+                                    class="Status Unpublish">Publish</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
 
         </div>

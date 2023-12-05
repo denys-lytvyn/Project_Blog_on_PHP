@@ -24,7 +24,7 @@ include "app/controllers/users.php";
     <section class="registration">
         <h2>Registation</h2>
         <p class="err">
-            <?= $errMsg ?>
+            <?php include 'app/helps/errorinfo.php'; ?>
         </p>
         <form class="reg" method="post" action="reg.php">
             <div class="form-group">

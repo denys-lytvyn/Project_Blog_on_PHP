@@ -36,27 +36,28 @@ include "../../app/controllers/posts.php";
                     <a href="<?php echo BASE_URL . "admin/posts/create.php"; ?>" class="btn btn-success">Add post</a>
                     <a href="<?php echo BASE_URL . "admin/posts/index.php"; ?>" class="btn btn-warning">Manage post</a>
                 </div>
-                <h2>Add posts</h2>
-
-                <!-- Error output -->
-                <?php include '../../app/helps/errorinfo.php'; ?>
-
+                <h2>Edit post</h2>
+                <p class="err">
+                    <!-- Error output -->
+                    <?php include '../../app/helps/errorinfo.php'; ?>
+                </p>
                 <div class="row add-post">
-                    <form action="create.php" method="post" enctype="multipart/form-data">
+                    <form action="edit.php" method="post" enctype="multipart/form-data">
+                        <input name="id" type="hidden" value="<?= $id; ?>">
                         <div class="col">
-                            <input name="title" type="text" value="<?= $title ?>" class="form-control"
+                            <input name="title" type="text" value="<?= $post['title']; ?>" class="form-control"
                                 placeholder="Title" aria-label="Post name">
                         </div>
                         <div class="col">
                             <label for="editor">Post content</label>
-                            <textarea name="content" class="form-control" id="editor" rows="3"></textarea>
+                            <textarea name="content" class="form-control" id="editor"
+                                rows="3"><?= $post['content']; ?></textarea>
                         </div>
                         <div class="input-group col">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                             <input name="img" type="file" class="form-control" id="inputGroupFile02">
                         </div>
                         <select name="topic" class="form-select" aria-label="Select">
-                            <option selected>Choose category</option>
                             <?php foreach ($topics as $key => $topic): ?>
                                 <option value="<?= $topic['id']; ?>">
                                     <?= $topic['name']; ?>
@@ -64,14 +65,21 @@ include "../../app/controllers/posts.php";
                             <?php endforeach; ?>
                         </select>
                         <div class="form-check">
-                            <input name="publish" class="form-check-input" type="checkbox" value="1" id="defaultCheck1"
-                                checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                Publish
-                            </label>
+                            <?php if (empty($publish) && $publish == 0): ?>
+                                <input name="publish" class="form-check-input" type="checkbox" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Publish
+                                </label>
+                            <?php else: ?>
+                                <input name="publish" class="form-check-input" type="checkbox" id="flexCheckChecked"
+                                    checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Publish
+                                </label>
+                            <?php endif; ?>
                         </div>
                         <br>
-                        <button name="add_post" class="btn btn-primary" type="submit">Save post</button>
+                        <button name="edit_post" class="btn btn-primary" type="submit">Save post</button>
                     </form>
                 </div>
             </div>

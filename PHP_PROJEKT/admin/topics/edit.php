@@ -41,7 +41,8 @@ include "../../app/controllers/topics.php";
                 </div>
                 <h2>Refresh category</h2>
                 <p class="err">
-                    <?= $errMsg ?>
+                    <!-- Error output -->
+                    <?php include '../../app/helps/errorinfo.php'; ?>
                 </p>
                 <div class="row add-post">
                     <form action="edit.php" method="post">

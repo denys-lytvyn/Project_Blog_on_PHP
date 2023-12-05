@@ -1,9 +1,11 @@
 <?php
-
+// Start a session
 session_start();
 
+// Include the database connection file
 require('connect.php');
 
+// Function to display variable content for debugging
 function tt($value)
 {
     echo '<pre>';
@@ -84,6 +86,7 @@ function selectOne($table, $params = [])
 
 }
 
+
 // INSERT INTO TABLE 
 function insert($table, $params)
 {
@@ -114,32 +117,27 @@ function insert($table, $params)
 
 
 // UPDATE VALUES IN TABLE 
-function update($pdo, $table, $id, $params)
+function update($table, $id, $params)
 {
-
-    $allowedFields = ['name', 'description'];
-
-    $setClause = '';
+    global $pdo;
+    $i = 0;
+    $str = '';
     $values = [];
-
     foreach ($params as $key => $value) {
-
-        if (in_array($key, $allowedFields)) {
-            $setClause .= ($setClause ? ', ' : '') . "`$key` = ?";
-            $values[] = $value;
+        if ($i === 0) {
+            $str = $str . $key . " = ?";
+        } else {
+            $str = $str . ", " . $key . " = ?";
         }
+        $values[] = $value;
+        $i++;
     }
 
-    $sql = "UPDATE `$table` SET $setClause WHERE `id` = ?";
-
     $values[] = $id;
-
+    $sql = "UPDATE $table SET $str WHERE id = ?";
     $query = $pdo->prepare($sql);
     $query->execute($values);
-
     dbCheckError($query);
-
-    return $id;
 }
 
 // DELETE FROM TABLE WHERE ...
@@ -155,4 +153,85 @@ function delete($table, $id)
 }
 
 
+// SELECT POSTS WITH USER_ID
+function selectAllFromPostsWithUsers($table1, $table2)
+{
+    global $pdo;
+
+    $sql = "SELECT
+    t1.id,
+    t1.title,
+    t1.img,
+    t1.content,
+    t1.status,
+    t1.id_topic,
+    t1.created_date,
+    t2.username
+    FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_user = t2.id
+    ";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+
+    return $query->fetchAll();
+}
+
+// SELECT POSTS WITH AUTHOR ON MAIN PAGE
+function selectAllFromPostsWithUsersOnIndex($table1, $table2)
+{
+    global $pdo;
+
+    $sql = "SELECT p.*, u.username FROM $table1 AS p JOIN $table2 AS u ON p.id_user = u.id WHERE p.status=1";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+
+    return $query->fetchAll();
+}
+
+// SLIDER 
+function selectTopTopicFromPostsOnIndex($table1)
+{
+    global $pdo;
+    $sql = "SELECT * FROM $table1 WHERE id_topic = 16";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
+// SEARCH
+function searchInTitleAndContent($text, $table1, $table2)
+{
+    $text = trim(strip_tags(stripslashes(htmlspecialchars($text))));
+
+    global $pdo;
+
+    $sql = "SELECT 
+        p.*, u.username 
+        FROM $table1 AS p 
+        JOIN $table2 AS u 
+        ON p.id_user = u.id 
+        WHERE p.status = 1
+        AND (p.title LIKE :text OR p.content LIKE :text)";
+
+    $query = $pdo->prepare($sql);
+    $query->execute(['text' => '%' . $text . '%']);
+    dbCheckError($query);
+
+    return $query->fetchAll();
+}
+
+// SELECT POST ON SINGLE PAGE
+function selectPostFromPostsWithUsersOnSingle($table1, $table2, $id)
+{
+    global $pdo;
+    $sql = "SELECT p.*, u.username FROM $table1 AS p JOIN $table2 AS u ON p.id_user = u.id WHERE p.id=$id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetch();
+}
 ?>

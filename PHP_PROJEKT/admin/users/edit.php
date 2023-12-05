@@ -37,24 +37,25 @@ include "../../app/controllers/users.php";
 
                     <a href="<?php echo BASE_URL . "admin/users/index.php"; ?>" class="btn btn-warning">Manage</a>
                 </div>
-                <h2>Create user</h2>
+                <h2>Edit user</h2>
                 <p class="err">
                     <?php include '../../app/helps/errorinfo.php'; ?>
                 </p>
                 <div class="row add-post">
-                    <form action="create.php" method="post">
+                    <form action="edit.php" method="post">
+                        <input name="id" type="hidden" value="<?= $id; ?>">
                         <div class="col">
                             <label for="inputAddress">Your login</label>
-                            <input name="login" type="text" class="form-control" id="inputAddress"
-                                placeholder="Input your login...">
+                            <input name="login" type="text" value="<?= $username; ?>" class="form-control"
+                                id="inputAddress" placeholder="Input your login...">
                         </div>
                         <div class="col">
                             <label for="exampleInputEmail1">Email</label>
-                            <input name="mail" type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" placeholder="Enter email">
+                            <input name="mail" type="email" value="<?= $email; ?>" class="form-control"
+                                id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                         </div>
                         <div class="col">
-                            <label for="exampleInputPassword1">Password</label>
+                            <label for="exampleInputPassword1">Reset the password</label>
                             <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1"
                                 placeholder="Password">
                         </div>
@@ -70,7 +71,7 @@ include "../../app/controllers/users.php";
                             </label>
                         </div>
                         <br>
-                        <button name="create-user" class="btn btn-primary" type="submit">Create</button>
+                        <button name="update-user" class="btn btn-primary" type="submit">Update</button>
                     </form>
                 </div>
             </div>

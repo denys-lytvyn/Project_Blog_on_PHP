@@ -9,10 +9,10 @@
                     <a href="<?php echo BASE_URL ?>">Main page</a>
                 </li>
                 <li>
-                    <a href="#">About us</a>
+                    <a href="<?php echo BASE_URL . 'aboutUs.php' ?>">About us</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="<?php echo BASE_URL . 'offer.php' ?>">Services</a>
                 </li>
                 <li>
                     <?php if (isset($_SESSION['id'])): ?>

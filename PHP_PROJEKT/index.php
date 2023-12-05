@@ -1,6 +1,10 @@
 <?php
 include 'path.php';
 include "app/controllers/topics.php";
+
+$posts = selectAllFromPostsWithUsersOnIndex('posts', 'users');
+$topTopic = selectTopTopicFromPostsOnIndex('posts');
+
 ?>
 
 <!DOCTYPE html>
@@ -34,125 +38,73 @@ include "app/controllers/topics.php";
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-
-                    <div class="item active">
-                        <img src="assets/images/1.jpg" alt="Los Angeles" style="width:100%;">
-                        <div class="carousel-caption-hack carousel-caption">
-                            <h3><a href="#">London london london</a></h3>
-                            <!-- <p>LA is always so much fun!</p> -->
-                        </div>
+                    <?php foreach ($topTopic as $key => $post): ?>
+                        <?php if ($key == 0): ?>
+                            <div class="item active">
+                            <?php else: ?>
+                                <div class="item">
+                                <?php endif; ?> <img src="<?= BASE_URL . 'assets/images/posts/' . $post['img'] ?>"
+                                    alt="<?= $post['title']; ?>" style="width:100%;">
+                                <div class="carousel-caption-hack carousel-caption">
+                                    <h3><a href="<?= BASE_URL . 'single.php?post=' . $post['id']; ?>">
+                                            <?= strlen($post['title']) > 47 ? substr($post['title'], 0, 80) . ' ...' : $post['title']; ?>
+                                    </h3> <!-- <p>LA is always so much fun!</p> -->
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
 
-                    <div class="item">
-                        <img src="assets/images/2.jpg" alt="Chicago" style="width:100%;">
-                        <div class="carousel-caption-hack carousel-caption">
-                            <h3><a href="#">Indigo indigo indigo</a></h3>
-                            <!-- <p>Thank you, Chicago!</p> -->
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <img src="assets/images/3.jpg" alt="New York" style="width:100%;">
-                        <div class="carousel-caption-hack carousel-caption">
-                            <h3><a href="#">Krakow krakow krakow</a></h3>
-                            <!-- <p>We love the Big Apple!</p> -->
-                        </div>
-                    </div>
-
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
         </section>
 
         <section class="main__content">
             <h2><ion-icon name="newspaper"></ion-icon>Publications</h2>
             <div class="main__content__container">
                 <section class="posts">
-                    <div class="posts__item">
-                        <div class="posts__item__img">
-                            <img src="./assets/images/1.jpg" alt="#" class="img-thumbnail img">
+                    <?php foreach ($posts as $post): ?>
+                        <div class="posts__item">
+                            <div class="posts__item__img">
+                                <img src="<?= BASE_URL . 'assets/images/posts/' . $post['img'] ?>"
+                                    alt="<?= $post['title']; ?>" class="img-thumbnail img">
+                            </div>
+                            <div class="posts__item__text">
+                                <h3><a href="<?= BASE_URL . 'single.php?post=' . $post['id']; ?>">
+                                        <?= strlen($post['title']) > 47 ? substr($post['title'], 0, 47) . ' ...' : $post['title']; ?>
+                                    </a></h3>
+                                <span>
+                                    <ion-icon name="person"></ion-icon>
+                                    <?= $post['username']; ?>
+                                    <span class="helped_class"></span>
+                                    <ion-icon name="calendar"></ion-icon>
+                                    <?= $post['created_date']; ?>
+                                </span>
+                                <?= strlen($post['content']) > 750 ? mb_substr($post['content'], 0, 750, 'UTF-8') . ' ...' : $post['content']; ?>
+                            </div>
                         </div>
-                        <div class="posts__item__text">
-                            <h3><a href="./single.php">State for web site</a></h3>
-                            <span><ion-icon name="person"></ion-icon>Autor name <ion-icon name="calendar"></ion-icon>
-                                May 14, 2023</span>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Optio eum quaerat possimus qui, repellat vel explicabo
-                                animi repellendus fuga quisquaLorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Optio eum quaerat possimus qui, repellat vel explicabo
-                                animi repellendus fuga quisquam aperiam veritatis aliquam
-                                mollitia magnam dolorum minuLorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Optio eum quaerat possimus qui, repellat vel explicabo
-                                animi repellendus fuga quisquam aperiam veritatis aliquam
-                                mollitia magnam dolorum minum aperiam veritatis aliquam
-                                mollitia magnam dolorum minus odio non esse?</p>
-                        </div>
-                    </div>
-                    <div class="posts__item">
-                        <div class="posts__item__img">
-                            <img src="./assets/images/2.jpg" alt="#" class="img-thumbnail">
-                        </div>
-                        <div class="posts__item__text">
-                            <h3><a href="#">State for web site</a></h3>
-                            <span><ion-icon name="person"></ion-icon>Autor name <ion-icon name="calendar"></ion-icon>
-                                May 14, 2023</span>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Optio eum quaerat possimus qui, repellat vel explicabo
-                                animi repellendus fuga quisquam aperiam veritatis aliquam
-                                mollitia magnam dolorum minus odio non esse?</p>
-                        </div>
-                    </div>
-                    <div class="posts__item">
-                        <div class="posts__item__img">
-                            <img src="./assets/images/3.jpg" alt="#" class="img-thumbnail">
-                        </div>
-                        <div class="posts__item__text">
-                            <h3><a href="#">State for web site</a></h3>
-                            <span><ion-icon name="person"></ion-icon>Autor name <ion-icon name="calendar"></ion-icon>
-                                May 14, 2023</span>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Optio eum quaerat possimus qui, repellat vel explicabo
-                                animi repellendus fuga quisquam aperiam veritatis aliquam
-                                mollitia magnam dolorum minus odio non esse?</p>
-                        </div>
-                    </div>
-                    <div class="posts__item">
-                        <div class="posts__item__img">
-                            <img src="./assets/images/1.jpg" alt="#" class="img-thumbnail">
-                        </div>
-                        <div class="posts__item__text">
-                            <h3><a href="#">State for web site</a></h3>
-                            <span><ion-icon name="person"></ion-icon>Autor name <ion-icon name="calendar"></ion-icon>
-                                May 14, 2023</span>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Optio eum quaerat possimus qui, repellat vel explicabo
-                                animi repellendus fuga quisquam aperiam veritatis aliquam
-                                mollitia magnam dolorum minus odio non esse?</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </section>
 
                 <section class="sidebar">
                     <div class="search">
                         <h3><ion-icon name="search"></ion-icon>Search</h3>
-                        <form action="/" method="post">
-                            <input type="text" name="search-term" class="text-input" placeholder="input your word">
+                        <form action="search.php" method="post">
+                            <input type="text" name="search-term" class="text-input" placeholder="input your word...">
                         </form>
                     </div>
                     <aside class="categories">
                         <h3><ion-icon name="list"></ion-icon>Categories</h3>
                         <ul>
                             <?php foreach ($topics as $key => $topic): ?>
-                                <li><a href="#">
+                                <li><a href="<?= BASE_URL . 'category.php?id=' . $topic['id'] ?>">
                                         <?= $topic['name'] ?>
                                     </a></li>
                             <?php endforeach; ?>

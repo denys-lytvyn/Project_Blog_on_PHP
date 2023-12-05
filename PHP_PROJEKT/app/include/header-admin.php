@@ -8,7 +8,7 @@
                 <li>
                     <a href="#">
                         <ion-icon name="person"></ion-icon>
-                        <?php if ($_SESSION['login']) {
+                        <?php if ($_SESSION['admin'] == 1) {
                             echo $_SESSION['login'];
                         } else {
                             echo 'You are not allowed to be here';

@@ -1,6 +1,6 @@
 <?php
 include '../../path.php';
-include '../../app/database/db.php';
+include "../../app/controllers/users.php";
 ?>
 
 <!DOCTYPE html>
@@ -33,47 +33,40 @@ include '../../app/database/db.php';
             <?php include '../../app/include/sidebar-admin.php'; ?>
             <div class="posts">
                 <div class="button row">
-                    <div class="button row">
-                        <a href="<?php echo BASE_URL . "admin/users/create.php"; ?>" class="btn btn-success">Add
-                            users</a>
-                        <a href="<?php echo BASE_URL . "admin/users/index.php"; ?>" class="btn btn-warning">Manage
-                            users</a>
-                    </div>
-                </div>
-                <h2>User control</h2>
-                <div class="row title-table">
+                    <a href="<?php echo BASE_URL . "admin/users/create.php"; ?>" class="btn btn-success">Add User</a>
 
+                    <a href="<?php echo BASE_URL . "admin/users/index.php"; ?>" class="btn btn-warning">Manage</a>
+                </div>
+                <h2>Users</h2>
+                <div class="row title-table">
                     <div class="id">ID</div>
                     <div class="title">Login</div>
+                    <div class="email">Email</div>
                     <div class="Author">isAdmin</div>
                     <div class="Update">Update</div>
                     <div class="Delete">Delete</div>
                 </div>
-                <div class="row post">
-                    <div class="id">1</div>
-                    <div class="title">Name</div>
-                    <div class="Author">Admin</div>
-                    <div><a href="#" class="Update">Edit</a></div>
-                    <div><a href="#" class="Delete">Delete</a></div>
-                </div>
-                <div class="row post">
-                    <div class="id">1</div>
-                    <div class="title">Name</div>
-                    <div class="Author">Admin</div>
-                    <div><a href="#" class="Update">Edit</a></div>
-                    <div><a href="#" class="Delete">Delete</a></div>
-                </div>
-                <div class="row post">
-                    <div class="id">1</div>
-                    <div class="title">Name</div>
-                    <div class="Author">Admin</div>
-                    <div><a href="#" class="Update">Edit</a></div>
-                    <div><a href="#" class="Delete">Delete</a></div>
-                </div>
-
-
+                <?php foreach ($users as $key => $user): ?>
+                    <div class="row post">
+                        <div class="id">
+                            <?= $user['id']; ?>
+                        </div>
+                        <div class="title">
+                            <?= $user['username']; ?>
+                        </div>
+                        <div class="email">
+                            <?= $user['email']; ?>
+                        </div>
+                        <?php if ($user['admin'] == 1): ?>
+                            <div class="Author">Admin</div>
+                        <?php else: ?>
+                            <div class="Author">User</div>
+                        <?php endif; ?>
+                        <div><a href="edit.php?edit_id=<?= $user['id']; ?>" class="Update">Edit</a></div>
+                        <div><a href="index.php?delete_id=<?= $user['id']; ?>" class="Delete">Delete</a></div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-
         </div>
     </div>
 

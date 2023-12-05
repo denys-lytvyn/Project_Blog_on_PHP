@@ -40,9 +40,7 @@ include "../../app/controllers/topics.php";
                         categories</a>
                 </div>
                 <h2>Create category</h2>
-                <p class="err">
-                    <?= $errMsg ?>
-                </p>
+                <?php include '../../app/helps/errorinfo.php'; ?>
                 <div class="row add-post">
                     <form action="create.php" method="post">
                         <div class="col">

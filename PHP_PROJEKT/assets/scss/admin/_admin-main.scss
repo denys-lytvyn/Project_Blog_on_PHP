@@ -39,12 +39,20 @@
         
         .posts{
             margin: 30px;
-            width: 70%;
+            width: 75%;
+
+            .row > div {
+                width: 150px;
+                overflow: hidden;
+                max-height: 60px;
+            }
+
             h2{
                 font-size: 3rem;
                 font-weight: bold;
                 margin: 20px 0;
             }
+            
             .button{
                 a{
                     margin: 10px;
@@ -64,6 +72,10 @@
                 font-size: 1.7rem;
                 margin: 10px 0;
                 color: red;
+
+                p{
+                    color: red;
+                }
             
             }         
             textarea{
@@ -91,9 +103,9 @@
 }
 .add-post{
     form{
-        width: 100%;
+        width: 700px;
         padding: 10px;
-        
+
         input, button, textarea{
             margin-bottom: 30px;
         }
@@ -116,3 +128,4 @@
 .input-group-text{
     margin-top: 20px;
 }
+
